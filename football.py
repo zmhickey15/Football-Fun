@@ -154,7 +154,7 @@ win_rates = \
     .mean()
     .loc[:, ['homeWin', 'draw', 'awayWin']])
 
-#print(win_rates)
+print(win_rates)# prints in table try to do this for goals scored in first and second half 
 
 
 # Set the style
@@ -192,7 +192,7 @@ away_win_rates = \
 
 hga = (home_win_rates - away_win_rates).reset_index().rename(columns={0: 'HGA'}).sort_values(by='HGA', ascending=False)
 
-#print( hga.head(10))
+print( hga.head(10))
 
 big_clubs = ['Barcelona', 'Real Madrid', 'Ath Madrid', 'Sevilla', 'Valencia']
 home_win_rates_5 = df[df.HomeTeam.isin(big_clubs)].groupby(['HomeTeam', 'season']).homeWin.mean()
@@ -200,10 +200,9 @@ away_win_rates_5 = df[df.AwayTeam.isin(big_clubs)].groupby(['AwayTeam', 'season'
 
 hga_top_5 = home_win_rates_5 - away_win_rates_5
 
-#print(hga_top_5.unstack(level=0))
+print(hga_top_5.unstack(level=0))
 
 sns.lineplot(x='season', y='HGA', hue='team', data=hga_top_5.reset_index().rename(columns={0: 'HGA', 'HomeTeam': 'team'}))
 plt.legend(loc='lower center', ncol=6, bbox_to_anchor=(0.45, -0.2))
 plt.title("HGA Among the top 5 clubs", fontsize=14)
 plt.show()
-
